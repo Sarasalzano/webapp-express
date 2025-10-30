@@ -1,6 +1,9 @@
 //importo mysql
 const mysql = require("mysql2");
 
+//importo pacchetto node per la lettura di variabili d'ambiente
+require('dotenv').config()
+
 //creo connessione al database
 const connection = mysql.createConnection({
     host : process.env.DB_HOST,
