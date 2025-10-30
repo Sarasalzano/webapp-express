@@ -11,3 +11,15 @@ function index(req, res){
     res.json(movies);
     })
 }
+
+//show
+function show(req, res){
+    const id = req.params.id
+    //prendi solo un film
+    const sql ="SELECT * FROM movies WHERE id = ?";
+    connection.query(sql, [id], (err, movies) => {
+    //gestisci errori
+    if (err) return res.status(500).json({error: "database query failed"});
+    res.json(movies[0]);
+    });
+}
