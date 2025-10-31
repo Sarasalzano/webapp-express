@@ -23,3 +23,5 @@ function show(req, res){
     res.json(movies[0]);
     });
 }
+
+module.exports = {index, show};
