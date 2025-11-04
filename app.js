@@ -7,13 +7,12 @@ const notFound = require("./middlewares/notFound");
 const { index, show } = require("./controllers/controller");
 const cors = require("cors");
 
+//cors
+app.use(cors({
+origin: 'http://localhost:5173'}));
+
 //middleware per rendere disponibile i file statici
 app.use(express.static('public'));
-
-// middleware per il CORS
-app.use(cors({
-origin: 'http://localhost:5173'
-}));
 
 //body-parser"
 app.use(express.json());
