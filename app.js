@@ -5,9 +5,15 @@ const router = require("./routers/router");
 const errorHandler = require("./middlewares/errorHandler");
 const notFound = require("./middlewares/notFound");
 const { index, show } = require("./controllers/controller");
+const cors = require("cors");
 
 //middleware per rendere disponibile i file statici
 app.use(express.static('public'));
+
+// middleware per il CORS
+app.use(cors({
+origin: 'http://localhost:5173'
+}));
 
 //body-parser"
 app.use(express.json());
