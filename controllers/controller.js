@@ -31,7 +31,7 @@ function storeReview(req, res){
     // recuperiamo i dati nel body
     const { name, vote, text } = req.body;
     // prepariamo la query per la chiamata al DB
-    const sql = 'INSERT INTO `reviews` (`name`, `vote`, `text`, `fk_movie`) VALUES (?,?,?,?)';
+    const sql = 'INSERT INTO `reviews` (`name`, `vote`, `text`, `movie_id`) VALUES (?,?,?,?)';
     //eseguiamo le query
     connection.query(sql, [name, vote, text, id], (err, result)=>{
         //se c'è un errore

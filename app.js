@@ -4,7 +4,7 @@ const port = 3000;
 const router = require("./routers/router");
 const errorHandler = require("./middlewares/errorHandler");
 const notFound = require("./middlewares/notFound");
-const { index, show } = require("./controllers/controller");
+const { index, show, storeReview } = require("./controllers/controller");
 const cors = require("cors");
 
 //cors
@@ -19,6 +19,9 @@ app.use(express.json());
 
 //rotta index
 app.get("/", index);
+
+//rotta store
+app.post("/movie/:id/reviews", storeReview);
 
 //rotta film
 app.use("/movie", router);
