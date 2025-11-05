@@ -41,7 +41,7 @@ function storeReview(req, res){
         res.json({ id: result.insertId, message: 'Review added' });
     });
 
-}
+};
 
 
 module.exports = {index, show, storeReview};
