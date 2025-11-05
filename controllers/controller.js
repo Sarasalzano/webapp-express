@@ -24,4 +24,24 @@ function show(req, res){
     });
 }
 
-module.exports = {index, show};
+//store recensione
+function storeReview(req, res){
+    //recupera id 
+    const id = req.params.id
+    // recuperiamo i dati nel body
+    const { name, vote, text } = req.body;
+    // prepariamo la query per la chiamata al DB
+    const sql = 'INSERT INTO `reviews` (`name`, `vote`, `text`, `fk_movie`) VALUES (?,?,?,?)';
+    //eseguiamo le query
+    connection.query(sql, [name, vote, text, id], (err, result)=>{
+        //se c'è un errore
+        if(err) return res.status(500).json({ error: "Database Query Failed" });
+        //se va tutto bene
+        res.status(201);
+        res.json({ id: result.insertId, message: 'Review added' });
+    });
+
+}
+
+
+module.exports = {index, show, storeReview};
