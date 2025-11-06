@@ -12,6 +12,6 @@ router.get("/", index);
 router.get("/:id", show);
 
 //store recensione
-router.get("/:id", storeReview);
+router.post("/:id", storeReview);
 
 module.exports = router;

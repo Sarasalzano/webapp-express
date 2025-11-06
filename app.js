@@ -19,10 +19,6 @@ app.use(express.json());
 
 //rotta index
 app.get("/", index);
-
-//rotta store
-app.post("/movie/:id/reviews", storeReview);
-
 //rotta film
 app.use("/movie", router);
 
