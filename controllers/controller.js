@@ -12,16 +12,28 @@ function index(req, res){
     })
 }
 
-//show
-function show(req, res){
-    const id = req.params.id
-    //prendi solo un film
-    const sql ="SELECT * FROM movies WHERE id = ?";
-    connection.query(sql, [id], (err, movies) => {
-    //gestisci errori
-    if (err) return res.status(500).json({error: "database query failed"});
-    res.json(movies[0]);
+function show(req, res) {
+  const id = req.params.id;
+  const sql = "SELECT * FROM movies WHERE id = ?";
+
+  connection.query(sql, [id], (err, movies) => {
+    if (err) return res.status(500).json({ error: "database query failed" });
+    if (movies.length === 0) return res.status(404).json({ error: "movie not found" });
+
+    const movie = movies[0]; 
+
+    // Ora facciamo la query per le recensioni
+    const sqlReviews = "SELECT * FROM reviews WHERE movie_id = ?";
+    connection.query(sqlReviews, [id], (err, reviews) => {
+      if (err) return res.status(500).json({ error: "database query failed" });
+
+      // Aggiungiamo le recensioni al film
+      movie.reviews = reviews;
+
+      // E solo ORA rispondiamo
+      res.json(movie);
     });
+  });
 }
 
 //store recensione
